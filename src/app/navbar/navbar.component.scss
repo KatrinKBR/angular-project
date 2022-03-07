@@ -1,0 +1,12 @@
+.navbar-custom{
+    background-color: #F0E9D2;
+    a {
+        color: #181D31;
+        &:hover{
+            color: #678983;
+        }
+        &.active {
+            font-weight: 700;
+        }
+    }
+}

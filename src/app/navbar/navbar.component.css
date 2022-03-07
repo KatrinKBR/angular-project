@@ -1,0 +1,16 @@
+.navbar-custom {
+  background-color: #F0E9D2;
+}
+
+.navbar-custom a {
+  color: #181D31;
+}
+
+.navbar-custom a:hover {
+  color: #678983;
+}
+
+.navbar-custom a.active {
+  font-weight: 700;
+}
+/*# sourceMappingURL=navbar.component.css.map */
