@@ -1,9 +1,14 @@
+$dark-blue: #1C658C;
+$light-blue: #398AB9;
+$dark-grey: #D8D2CB;
+$light-grey: #EEEEEE;
+
 .navbar-custom{
-    background-color: #F0E9D2;
+    background-color: $dark-grey;
     a {
-        color: #181D31;
+        color: $dark-blue;
         &:hover{
-            color: #678983;
+            color: $light-blue;
         }
         &.active {
             font-weight: 700;

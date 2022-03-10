@@ -1,13 +1,13 @@
 .navbar-custom {
-  background-color: #F0E9D2;
+  background-color: #D8D2CB;
 }
 
 .navbar-custom a {
-  color: #181D31;
+  color: #1C658C;
 }
 
 .navbar-custom a:hover {
-  color: #678983;
+  color: #398AB9;
 }
 
 .navbar-custom a.active {
