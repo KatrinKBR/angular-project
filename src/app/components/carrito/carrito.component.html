@@ -1,0 +1,14 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <p class="fs-2 text-center my-5">Carrito</p>
+    <div class="col-lg-6 mx-auto mb-4 box" *ngFor="let element of cartData">
+        <p class="fs-5">{{element.titulo}}</p>
+        <p>Precio: {{element.precio}}</p>
+    </div>
+    <div class="col-lg-6 mx-auto">
+        <p class="fs-4">Total: ${{calculateTotal()}}</p>
+    </div>
+    <div class="col-lg-6 mx-auto"> 
+        <button type="button" class="btn btn-primary" (click)="shop()">Comprar</button>
+    </div>
+</div>

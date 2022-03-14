@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<app-carrusel></app-carrusel>
+<div class="container">
+    <p class="fs-2 text-center my-5">Películas</p>
+    <div class="row mx-auto my-5" *ngFor="let movie of movieData">
+        <div class="col-lg-6 text-center">
+            <img src="{{movie.poster}}">
+        </div>
+        <div class="col-lg-6 align-self-center">
+            <p class="fs-4">{{movie.titulo}}</p>
+            <p>Duración: {{movie.duracion}} minutos</p>
+            <p>Género: {{movie.genero}}</p>
+            <p>Precio: ${{movie.precio}}</p>
+        </div>
+    </div>
+</div>

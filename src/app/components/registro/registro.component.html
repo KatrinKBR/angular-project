@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <p class="fs-2 text-center my-5">Regístrate</p>
+  <div class="col-md-4 mx-auto">
+    <form [formGroup]="userForm" (submit)="register()">
+        <div class="col-lg-12 mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" [ngClass]="{'is-invalid': userForm.get('name')!.invalid && userForm.get('name')!.touched}" id="name" formControlName="name">
+            <div class="text-danger" *ngIf="userForm.get('name')!.invalid && userForm.get('name')!.touched">
+                Nombre obligatorio.
+            </div>
+        </div>
+        <div class="col-lg-12 mb-3">
+            <label for="lastName" class="form-label">Apellido</label>
+            <input type="text" class="form-control" [ngClass]="{'is-invalid': userForm.get('lastName')!.invalid && userForm.get('lastName')!.touched}" id="lastName" formControlName="lastName">
+            <div class="text-danger" *ngIf="userForm.get('lastName')!.invalid && userForm.get('lastName')!.touched">
+                Apellido obligatorio.
+            </div>
+        </div>
+        <div class="col-lg-12 mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" [ngClass]="{'is-invalid': userForm.get('email')!.invalid && userForm.get('email')!.touched}" id="email" formControlName="email">
+            <div class="text-danger" *ngIf="userForm.get('email')!.invalid && userForm.get('email')!.touched">
+                Email obligatorio.
+            </div>
+        </div>
+        <div class="col-lg-12 mb-3">
+            <label for="birthDate" class="form-label">Fecha de nacimiento</label>
+            <input type="date" class="form-control" [ngClass]="{'is-invalid': userForm.get('birthDate')!.invalid && userForm.get('birthDate')!.touched}" id="birthDate" formControlName="birthDate">
+            <div class="text-danger" *ngIf="userForm.get('birthDate')!.invalid && userForm.get('birthDate')!.touched">
+                Fecha de nacimiento obligatorio.
+            </div>
+        </div>
+        <div class="col-lg-12 mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" [ngClass]="{'is-invalid': userForm.get('password')!.invalid && userForm.get('password')!.touched}" id="password" formControlName="password">
+            <div class="text-danger" *ngIf="userForm.get('password')!.invalid && userForm.get('password')!.touched">
+                Contraseña obligatorio.
+            </div>
+        </div>
+        <div class="col-lg-12 mb-3">
+          <div class="form-check">
+            <input class="form-check-input" [ngClass]="{'is-invalid': userForm.get('isChecked')!.invalid && userForm.get('isChecked')!.touched}" type="checkbox" id="isChecked" formControlName="isChecked">
+            <label class="form-check-label" for="isChecked">
+                Acepto los términos y condiciones
+            </label>
+          </div>
+        </div>
+        <div class="col-lg-12 mb-3">
+          <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Registrarse</button>
+        </div>
+      </form>
+  </div>
+</div>

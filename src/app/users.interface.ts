@@ -4,5 +4,4 @@ export interface UserInterface {
     email: string,
     birthDate: string,
     password: string,
-    isChecked: boolean
 }

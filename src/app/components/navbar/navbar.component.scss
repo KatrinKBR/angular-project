@@ -15,3 +15,7 @@ $light-grey: #EEEEEE;
         }
     }
 }
+
+.custom-toggler .navbar-toggler-icon{
+	background-image: url('../../../assets/hamburger.svg');
+}
