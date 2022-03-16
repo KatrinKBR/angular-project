@@ -19,3 +19,17 @@ $light-grey: #EEEEEE;
 .custom-toggler .navbar-toggler-icon{
 	background-image: url('../../../assets/hamburger.svg');
 }
+
+.btnsNavBar {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+.mr-5 {
+    margin-right: 5em;
+}
