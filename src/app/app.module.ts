@@ -11,6 +11,8 @@ import { ListadoComponent } from './components/listado/listado.component';
 import { InfoComponent } from './components/info/info.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LandingComponent } from './components/landing/landing.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { AppRoutingModule } from './app-routing.module';
     ListadoComponent,
     InfoComponent,
     CarritoComponent,
+    LandingComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
