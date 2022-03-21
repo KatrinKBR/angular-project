@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JsonDataService } from 'src/app/services/json-data.service';
 
 @Component({
   selector: 'app-listado',
@@ -7,33 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListadoComponent implements OnInit {
 
-  movieData: any = [
-    { 
-      titulo: "Harry Potter y la piedra filosofal",
-      poster: "../../assets/HP1.jpg",
-      duracion: 152,
-      genero: ["Fantasía", "Aventuras"],
-      precio: 3000
-    },
-    {
-      titulo: "Doctor Sueño",
-      poster: "../../assets/DS.jpg",
-      duracion: 153,
-      genero: ["Terror", "Suspenso"],
-      precio: 5000
-    },
-    {
-      titulo: "Guardianes de la Galaxia",
-      poster: "../../assets/GoG.jpg",
-      duracion: 122,
-      genero: ["Acción", "Ciencia ficción", "Superhéroes"],
-      precio: 6000
-    }
-  ]
+  movieData: any = []
 
-  constructor() { }
+  constructor(private jsonDataService: JsonDataService) { }
 
   ngOnInit(): void {
+    this.jsonDataService.getData().subscribe((data) => (this.movieData = data))
   }
 
 }
