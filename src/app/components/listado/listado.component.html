@@ -9,7 +9,7 @@
             <p>Duración: {{movie.duracion}} minutos</p>
             <p>Género: {{movie.genero}}</p>
             <p>Precio: ${{movie.precio}}</p>
-            <a routerLink="/info">
+            <a [routerLink] ="['/info', movie.id]">
                 <button type="button" class="btn btn-primary">Ver más</button>
             </a>
         </div>

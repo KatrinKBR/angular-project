@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'registro', component: RegistroComponent },
   { path: 'login', component: LoginComponent },
   { path: 'listado', component: ListadoComponent },
-  { path: 'info', component: InfoComponent },
+  { path: 'info/:id', component: InfoComponent },
   { path: 'carrito', component: CarritoComponent },
   { path: '**', component: NotFoundComponent}
 ]

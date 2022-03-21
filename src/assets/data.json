@@ -1,5 +1,6 @@
 [
     { 
+      "id": 1,
       "titulo": "Harry Potter y la piedra filosofal",
       "poster": "../../assets/HP1.jpg",
       "duracion": 152,
@@ -7,6 +8,7 @@
       "precio": 3000
     },
     {
+      "id": 2,
       "titulo": "Doctor Sueño",
       "poster": "../../assets/DS.jpg",
       "duracion": 153,
@@ -14,6 +16,7 @@
       "precio": 5000
     },
     {
+      "id": 3,
       "titulo": "Guardianes de la Galaxia",
       "poster": "../../assets/GoG.jpg",
       "duracion": 122,

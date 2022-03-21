@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { JsonDataService } from 'src/app/services/json-data.service';
 
@@ -18,4 +18,5 @@ export class ListadoComponent implements OnInit {
     this.jsonDataService.getData().pipe(takeUntil(this.onDestroy$))
     .subscribe((data) => (this.movieData = data))
   }
+
 }
