@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { JsonDataService } from 'src/app/services/json-data.service';
-
+import { MovieApiService } from 'src/app/services/movie-api.service';
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
@@ -12,11 +11,11 @@ export class ListadoComponent implements OnInit {
   movieData: any = []
   onDestroy$ = new Subject<any>();
 
-  constructor(private jsonDataService: JsonDataService) { }
+  constructor(private movieApiService: MovieApiService) { }
 
   ngOnInit(): void {
-    this.jsonDataService.getData().pipe(takeUntil(this.onDestroy$))
-    .subscribe((data) => (this.movieData = data))
+    this.movieApiService.getMovies().pipe(takeUntil(this.onDestroy$))
+    .subscribe((data) => (this.movieData = data.results))
   }
 
 }

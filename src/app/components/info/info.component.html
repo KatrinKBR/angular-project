@@ -1,24 +1,22 @@
 <div class="container">
     <div class="row mx-auto my-5">
-        <p class="fs-3 text-center mb-5">{{movieInfo.titulo}}</p>
+        <p class="fs-3 text-center mb-5">{{movieInfo.title}}</p>
         <div class="col-lg-6 text-center align-self-center">
-            <img src="{{movieInfo.poster}}">
+            <img src="{{movieInfo.poster_path}}">
         </div>
         <div class="col-lg-6 align-self-center">
-            <span class="fs-5">Director:</span>
-            <p>{{movieInfo.director}}</p>
-            <span class="fs-5">Año:</span>
-            <p>{{movieInfo.anio}}</p>
+            <span class="fs-5">Descripción:</span>
+            <p>{{movieInfo.overview}}</p>
+            <span class="fs-5">Fecha de estreno:</span>
+            <p>{{movieInfo.release_date}}</p>
             <span class="fs-5">Duración:</span>
-            <p>{{movieInfo.duracion}} minutos</p>
-            <span class="fs-5">Género: </span>
-            <p>{{movieInfo.genero}}</p>
+            <p>{{movieInfo.runtime}} minutos</p>
+            <!-- <span class="fs-5">Género: </span>
+            <p>{{movieInfo.genres.name}}</p> -->
             <span class="fs-5">Audio:</span>
-            <p>{{movieInfo.audio}}</p>
-            <span class="fs-5">Subtítulos: </span>
-            <p>{{movieInfo.subtitulos}}</p>
+            <p>{{movieInfo.original_language}}</p>
             <span class="fs-5">Precio: </span>
-            <p>${{movieInfo.precio}}</p>
+            <p>$4000</p>
         </div>
     </div>
 </div>

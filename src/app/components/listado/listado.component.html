@@ -2,13 +2,12 @@
     <p class="fs-2 text-center my-5">Películas</p>
     <div class="row mx-auto my-5" *ngFor="let movie of movieData">
         <div class="col-lg-6 text-center">
-            <img src="{{movie.poster}}">
+            <img src="{{movie.poster_path}}">
         </div>
         <div class="col-lg-6 align-self-center">
-            <p class="fs-4">{{movie.titulo}}</p>
-            <p>Duración: {{movie.duracion}} minutos</p>
-            <p>Género: {{movie.genero}}</p>
-            <p>Precio: ${{movie.precio}}</p>
+            <p class="fs-4">{{movie.title}}</p>
+            <p>Audio: {{movie.original_language}}</p>
+            <p>Fecha de estreno: {{movie.release_date}}</p>
             <a [routerLink] ="['/info', movie.id]">
                 <button type="button" class="btn btn-primary">Ver más</button>
             </a>
