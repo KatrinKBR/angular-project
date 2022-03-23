@@ -9,7 +9,7 @@ export class MovieApiService {
   constructor(private http: HttpClient) {}
 
   getMovies(): Observable<any> {
-    let url: string = `https://api.themoviedb.org/3/movie/671/similar?api_key=5fe1a295cfdf0cd4bad8244749f1d833&language=es-ES&page=1`
+    let url: string = `https://api.themoviedb.org/3/discover/movie?api_key=5fe1a295cfdf0cd4bad8244749f1d833&language=es-ES&sort_by=popularity.desc&include_adult=false&page=1`
     return this.http.get(url)
   }
 

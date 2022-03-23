@@ -9,6 +9,7 @@ import { MovieApiService } from 'src/app/services/movie-api.service';
 export class ListadoComponent implements OnInit {
 
   movieData: any = []
+  moviePosterPath: string = 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2'
   onDestroy$ = new Subject<any>();
 
   constructor(private movieApiService: MovieApiService) { }
