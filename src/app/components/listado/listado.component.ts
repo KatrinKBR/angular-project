@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { MovieApiService } from 'src/app/services/movie-api.service';
+import { Movie } from 'src/app/models/movie';
+import { PATH_URL } from 'src/app/utils/config.url';
+
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
@@ -8,8 +11,8 @@ import { MovieApiService } from 'src/app/services/movie-api.service';
 })
 export class ListadoComponent implements OnInit {
 
-  movieData: any = []
-  moviePosterPath: string = 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2'
+  moviePosterPath = PATH_URL.MOVIE_POSTER;
+  movieData: Movie[] = [];
   onDestroy$ = new Subject<any>();
 
   constructor(private movieApiService: MovieApiService) { }
@@ -18,5 +21,4 @@ export class ListadoComponent implements OnInit {
     this.movieApiService.getMovies().pipe(takeUntil(this.onDestroy$))
     .subscribe((data) => (this.movieData = data.results))
   }
-
 }
