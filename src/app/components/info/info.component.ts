@@ -16,12 +16,35 @@ export class InfoComponent implements OnInit {
   movieInfo!: MovieDetails;
   moviePosterPath = PATH_URL.MOVIE_POSTER;
   onDestroy$ = new Subject<any>();
-  
+
   constructor(private route: ActivatedRoute, private movieApiService: MovieApiService) { }
 
   ngOnInit(): void {
     let movieId = this.route.snapshot.params['id'];
     this.movieApiService.getMovieInfo(movieId).pipe(takeUntil(this.onDestroy$))
-    .subscribe((data) => (this.movieInfo = data));
+      .subscribe(data => {
+        this.movieInfo = data;
+        this.movieInfo.price = this.priceSetter(this.movieInfo.runtime)
+      });
+  }
+
+  audioMapper(iso: string) {
+    const LANGUAGES: { [key: string]: any } = {
+      en: 'Inglés',
+      es: 'Español',
+      fr: 'Francés',
+      it: 'Italiano',
+      de: 'Alemán',
+      ja: 'Japonés',
+      kr: 'Coreano'
+    }
+
+    const DEFAULT_LANGUAGE = 'Idioma desconocido'
+
+    return LANGUAGES[iso] || DEFAULT_LANGUAGE
+  }
+
+  priceSetter(runtime: number) {
+    return runtime >= 120 ? 5000 : 4000
   }
 }
