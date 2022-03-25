@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { MovieDetails } from 'src/app/models/movie';
 import { MovieApiService } from 'src/app/services/movie-api.service';
-import { PATH_URL } from 'src/app/utils/config.url';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { PATH_URL } from 'src/app/utils/config.url';
 export class InfoComponent implements OnInit {
 
   movieInfo!: MovieDetails;
-  moviePosterPath = PATH_URL.MOVIE_POSTER;
+  moviePosterPath = environment.MOVIE_POSTER;
   onDestroy$ = new Subject<any>();
 
   constructor(private route: ActivatedRoute, private movieApiService: MovieApiService) { }

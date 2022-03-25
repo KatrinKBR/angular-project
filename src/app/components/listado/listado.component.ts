@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { MovieApiService } from 'src/app/services/movie-api.service';
 import { Movie } from 'src/app/models/movie';
-import { PATH_URL } from 'src/app/utils/config.url';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-listado',
@@ -11,7 +11,7 @@ import { PATH_URL } from 'src/app/utils/config.url';
 })
 export class ListadoComponent implements OnInit {
 
-  moviePosterPath = PATH_URL.MOVIE_POSTER;
+  moviePosterPath = environment.MOVIE_POSTER;
   movieData: Movie[] = [];
   onDestroy$ = new Subject<any>();
 
