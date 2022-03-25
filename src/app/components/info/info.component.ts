@@ -22,10 +22,13 @@ export class InfoComponent implements OnInit {
   ngOnInit(): void {
     let movieId = this.route.snapshot.params['id'];
     this.movieApiService.getMovieInfo(movieId).pipe(takeUntil(this.onDestroy$))
-      .subscribe(data => {
+    .subscribe({
+      next: (data) => {
         this.movieInfo = data;
         this.movieInfo.price = this.priceSetter(this.movieInfo.runtime)
-      });
+      },
+      error: (error) => console.log('Se ha producido un error', error)
+    });
   }
 
   audioMapper(iso: string) {

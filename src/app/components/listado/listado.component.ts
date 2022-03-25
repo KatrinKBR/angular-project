@@ -19,6 +19,9 @@ export class ListadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.movieApiService.getMovies().pipe(takeUntil(this.onDestroy$))
-    .subscribe((data) => (this.movieData = data.results))
+    .subscribe({
+      next: (data) => (this.movieData = data.results),
+      error: (error) => console.log('Se ha producido un error', error)
+    })
   }
 }
