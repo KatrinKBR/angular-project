@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ListadoComponent implements OnInit {
 
-  moviePosterPath = environment.MOVIE_POSTER;
+  moviePosterPath = environment.MOVIE_POSTER_URL;
   movieData: Movie[] = [];
   onDestroy$ = new Subject<any>();
 

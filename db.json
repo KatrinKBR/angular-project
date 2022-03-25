@@ -1,28 +1,47 @@
 {
   "users": [
-      { 
+    {
       "id": 1,
+      "userName": "anaprz",
       "name": "Ana",
       "lastName": "Perez",
       "email": "anaperez@test.com",
       "birthDate": "01/01/1990",
       "password": "1234"
-      },
-      {
+    },
+    {
       "id": 2,
       "name": "Juan",
+      "userName": "juanmarz",
       "lastName": "Martinez",
       "email": "juanm@test.com",
       "birthDate": "01/01/1990",
       "password": "1234"
-      },
-      {
+    },
+    {
       "id": 3,
       "name": "Pedro",
+      "userName": "pedro123",
       "lastName": "Rodriguez",
       "email": "pedrodriguez@test.com",
       "birthDate": "01/01/1990",
       "password": "1234"
-      }
+    }
+  ],
+  "logged": [
+    {
+      "id": 1,
+      "userName": "anaprz",
+      "password": "1234"
+    },
+    {
+      "id": 2,
+      "password": "1234"
+    },
+    {
+      "id": 3,
+      "userName": "pedro123",
+      "password": "1234"
+    }
   ]
 }

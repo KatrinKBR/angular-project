@@ -10,10 +10,10 @@ export class MovieApiService {
   constructor(private http: HttpClient) {}
 
   getMovies(): Observable<any> {
-    return this.http.get(environment.MOVIE_LIST)
+    return this.http.get(environment.MOVIE_LIST_URL)
   }
 
   getMovieInfo(id: number): Observable<any> {
-    return this.http.get(environment.MOVIE_DETAILS(id))
+    return this.http.get(environment.MOVIE_DETAILS_URL(id))
   }
 }

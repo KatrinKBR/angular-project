@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 export class InfoComponent implements OnInit {
 
   movieInfo!: MovieDetails;
-  moviePosterPath = environment.MOVIE_POSTER;
+  moviePosterPath = environment.MOVIE_POSTER_URL;
   onDestroy$ = new Subject<any>();
 
   constructor(private route: ActivatedRoute, private movieApiService: MovieApiService) { }
