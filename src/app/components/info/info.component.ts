@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { Cart } from 'src/app/models/cart';
 import { MovieDetails } from 'src/app/models/movie';
+import { CartApiService } from 'src/app/services/cart-api.service';
 import { MovieApiService } from 'src/app/services/movie-api.service';
 import { environment } from 'src/environments/environment';
 
@@ -17,7 +19,7 @@ export class InfoComponent implements OnInit {
   moviePosterPath = environment.MOVIE_POSTER_URL;
   onDestroy$ = new Subject<any>();
 
-  constructor(private route: ActivatedRoute, private movieApiService: MovieApiService) { }
+  constructor(private route: ActivatedRoute, private movieApiService: MovieApiService, private cartApiService: CartApiService) { }
 
   ngOnInit(): void {
     let movieId = this.route.snapshot.params['id'];
@@ -49,5 +51,15 @@ export class InfoComponent implements OnInit {
 
   priceSetter(runtime: number) {
     return runtime >= 120 ? 5000 : 4000
+  }
+
+  addToCart() {
+    this.cartApiService.postItem<Cart>({id: this.movieInfo.id, title: this.movieInfo.title, price: this.movieInfo.price}).pipe(takeUntil(this.onDestroy$))
+    .subscribe({
+      next: (data) => {
+        console.log(data)
+      },
+      error: (error) => console.log('Se ha producido un error', error)
+    });
   }
 }

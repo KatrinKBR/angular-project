@@ -28,7 +28,7 @@
       "password": "1234"
     }
   ],
-  "logged": [
+  "logged-users": [
     {
       "id": 1,
       "userName": "anaprz",
@@ -36,12 +36,30 @@
     },
     {
       "id": 2,
+      "userName": "juanmarz",
       "password": "1234"
     },
     {
       "id": 3,
       "userName": "pedro123",
       "password": "1234"
+    },
+    {
+      "userName": "test",
+      "password": "123",
+      "id": 4
+    }
+  ],
+  "cart": [
+    {
+      "id": 508947,
+      "title": "Red",
+      "price": 4000
+    },
+    {
+      "id": 634649,
+      "title": "Spider-Man: No Way Home",
+      "price": 5000
     }
   ]
 }

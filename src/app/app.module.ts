@@ -14,7 +14,6 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LandingComponent } from './components/landing/landing.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { MovieApiService } from './services/movie-api.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +34,7 @@ import { MovieApiService } from './services/movie-api.service';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [MovieApiService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

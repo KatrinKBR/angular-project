@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
+import { Cart } from 'src/app/models/cart';
+import { CartApiService } from 'src/app/services/cart-api.service';
 
 @Component({
   selector: 'app-carrito',
@@ -7,20 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarritoComponent implements OnInit {
 
-  cartData: any = [
-    { titulo: "Harry Potter y la piedra filosofal", precio: 3000 },
-    { titulo: "Doctor Sueño", precio: 5000 },
-  ]
+  cartData!: Cart[];
+  onDestroy$ = new Subject<any>();
 
-  constructor() { }
+  constructor(private cartApiService: CartApiService) { }
 
   ngOnInit(): void {
+    this.cartApiService.getItems<Cart>().pipe(takeUntil(this.onDestroy$))
+    .subscribe({
+      next: (data) => {
+        this.cartData = data
+        console.log(this.cartData)
+      },
+      error: (error) => console.log('Se ha producido un error', error)
+    });
   }
 
   calculateTotal() {
     let sum: number = 0
     for (let element of this.cartData) {
-      sum += element.precio
+      sum += element.price
     }
     return sum
   }
