@@ -1,0 +1,28 @@
+{
+  "users": [
+      { 
+      "id": 1,
+      "name": "Ana",
+      "lastName": "Perez",
+      "email": "anaperez@test.com",
+      "birthDate": "01/01/1990",
+      "password": "1234"
+      },
+      {
+      "id": 2,
+      "name": "Juan",
+      "lastName": "Martinez",
+      "email": "juanm@test.com",
+      "birthDate": "01/01/1990",
+      "password": "1234"
+      },
+      {
+      "id": 3,
+      "name": "Pedro",
+      "lastName": "Rodriguez",
+      "email": "pedrodriguez@test.com",
+      "birthDate": "01/01/1990",
+      "password": "1234"
+      }
+  ]
+}
