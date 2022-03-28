@@ -3,9 +3,9 @@
   <div class="col-md-4 mx-auto">
     <form [formGroup]="userForm" (submit)="register()">
         <div class="col-lg-12 mb-3">
-            <label for="userName" class="form-label">Nombre de usuario</label>
-            <input type="text" class="form-control" [ngClass]="{'is-invalid': userForm.get('userName')!.invalid && userForm.get('userName')!.touched}" id="userName" formControlName="userName">
-            <div class="text-danger" *ngIf="userForm.get('userName')!.invalid && userForm.get('userName')!.touched">
+            <label for="username" class="form-label">Nombre de usuario</label>
+            <input type="text" class="form-control" [ngClass]="{'is-invalid': userForm.get('username')!.invalid && userForm.get('username')!.touched}" id="username" formControlName="username">
+            <div class="text-danger" *ngIf="userForm.get('username')!.invalid && userForm.get('username')!.touched">
                 Nombre de usuario obligatorio.
             </div>
         </div>

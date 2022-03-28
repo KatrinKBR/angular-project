@@ -8,6 +8,7 @@ import { ListadoComponent } from './components/listado/listado.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'listado', component: ListadoComponent },
   { path: 'info/:id', component: InfoComponent },
   { path: 'carrito', component: CarritoComponent },
+  { path: 'user-list', component: UserListComponent },
   { path: '**', component: NotFoundComponent}
 ]
 

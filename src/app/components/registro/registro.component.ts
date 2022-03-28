@@ -18,7 +18,7 @@ export class RegistroComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private usersApi: UsersApiService) { 
     this.userForm = this.fb.group({
-      userName: ['', Validators.required],
+      username: ['', Validators.required],
       name: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')]],
@@ -29,24 +29,25 @@ export class RegistroComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Solo para efectos de prueba del metodo GET
-    this.usersApi.getUsers<User>(environment.USERS_URL).pipe(takeUntil(this.onDestroy$))
-    .subscribe({
-      next: (data) => {
-        this.userData = data;
-        console.log(this.userData);
-      },
-      error: (error) => console.log('Se ha producido un error', error)
-    });
   }
 
   register() {
-    this.usersApi.postUser<User>(environment.USERS_URL, this.userForm.value)
+    let user: User = {
+      id: 0,
+      username: this.userForm.value.username,
+      name: this.userForm.value.name,
+      lastName: this.userForm.value.lastName,
+      email: this.userForm.value.email,
+      birthDate: this.userForm.value.birthDate,
+      password: this.userForm.value.password
+    };
+
+    this.usersApi.postUser<User>(environment.USERS_URL, user)
     .pipe(takeUntil(this.onDestroy$))
     .subscribe({
       next: (data) => {
         this.userData = data;
-        console.log(this.userData);
+        console.log(`Usuario registrado correctamente`);
         this.userForm.reset();
       },
       error: (error) => console.log('Se ha producido un error', error)

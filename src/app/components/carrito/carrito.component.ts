@@ -10,7 +10,7 @@ import { CartApiService } from 'src/app/services/cart-api.service';
 })
 export class CarritoComponent implements OnInit {
 
-  cartData!: Cart[];
+  cartData: Cart[] = [];
   onDestroy$ = new Subject<any>();
 
   constructor(private cartApiService: CartApiService) { }

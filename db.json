@@ -2,46 +2,46 @@
   "users": [
     {
       "id": 1,
-      "userName": "anaprz",
+      "username": "anaperez",
       "name": "Ana",
       "lastName": "Perez",
-      "email": "anaperez@test.com",
-      "birthDate": "01/01/1990",
-      "password": "1234"
+      "email": "anaper@test.com",
+      "birthDate": "1991-01-01",
+      "password": "123"
     },
     {
       "id": 2,
-      "userName": "juanmarz",
+      "username": "juanmarz",
       "name": "Juan",
       "lastName": "Martinez",
       "email": "juanm@test.com",
-      "birthDate": "01/01/1990",
-      "password": "1234"
+      "birthDate": "1992-02-02",
+      "password": "4321"
     },
     {
       "id": 3,
-      "userName": "pedro123",
+      "username": "pedro123",
       "name": "Pedro",
       "lastName": "Rodriguez",
       "email": "pedrodriguez@test.com",
-      "birthDate": "01/01/1990",
-      "password": "1234"
+      "birthDate": "1993-03-03",
+      "password": "2143"
     }
   ],
   "logged-users": [
     {
       "id": 1,
-      "userName": "anaprz",
+      "username": "anaprz",
       "password": "1234"
     },
     {
       "id": 2,
-      "userName": "juanmarz",
+      "username": "juanmarz",
       "password": "1234"
     },
     {
       "id": 3,
-      "userName": "pedro123",
+      "username": "pedro123",
       "password": "1234"
     }
   ],

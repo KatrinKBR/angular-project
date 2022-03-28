@@ -14,6 +14,7 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LandingComponent } from './components/landing/landing.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     CarritoComponent,
     LandingComponent,
     NotFoundComponent,
+    UserListComponent,
   ],
   imports: [
     BrowserModule,
