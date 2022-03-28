@@ -2,6 +2,7 @@
     <p class="fs-2 text-center my-5">Carrito</p>
     <div class="col-lg-6 mx-auto mb-4 box" *ngFor="let element of cartData">
         <p class="fs-5">{{element.title}}</p>
+        <p>Cantidad: {{element.count}}</p>
         <p>Precio: {{element.price}}</p>
     </div>
     <div class="col-lg-6 mx-auto">

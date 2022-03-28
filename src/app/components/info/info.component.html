@@ -18,7 +18,7 @@
             <p>{{audioMapper(movieInfo.original_language)}}</p>
             <h5>Precio: </h5>
             <p>${{movieInfo.price}}</p>
-            <button type="button" class="btn btn-primary" (click)="addToCart()">Agregar al carrito</button>
+            <button type="button" class="btn btn-primary" (click)="addToCart(movieInfo.id)">Agregar al carrito</button>
         </div>
     </div>
 </div>

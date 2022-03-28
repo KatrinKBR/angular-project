@@ -16,11 +16,10 @@ export class CarritoComponent implements OnInit {
   constructor(private cartApiService: CartApiService) { }
 
   ngOnInit(): void {
-    this.cartApiService.getItems<Cart>().pipe(takeUntil(this.onDestroy$))
+    this.cartApiService.getAllItems<Cart[]>().pipe(takeUntil(this.onDestroy$))
     .subscribe({
       next: (data) => {
         this.cartData = data
-        console.log(this.cartData)
       },
       error: (error) => console.log('Se ha producido un error', error)
     });

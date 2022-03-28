@@ -18,10 +18,16 @@ export class InfoComponent implements OnInit {
   movieInfo!: MovieDetails;
   moviePosterPath = environment.MOVIE_POSTER_URL;
   onDestroy$ = new Subject<any>();
+  cartItems!: Cart[];
 
   constructor(private route: ActivatedRoute, private movieApiService: MovieApiService, private cartApiService: CartApiService) { }
 
   ngOnInit(): void {
+    this.getMovieDetails();
+    this.getCartItems();
+  }
+
+  getMovieDetails() {
     let movieId = this.route.snapshot.params['id'];
     this.movieApiService.getMovieInfo(movieId).pipe(takeUntil(this.onDestroy$))
     .subscribe({
@@ -31,6 +37,53 @@ export class InfoComponent implements OnInit {
       },
       error: (error) => console.log('Se ha producido un error', error)
     });
+  }
+
+  priceSetter(runtime: number) {
+    return runtime >= 120 ? 5000 : 4000
+  }
+
+  getCartItems() {
+    this.cartApiService.getAllItems<Cart[]>().pipe(takeUntil(this.onDestroy$))
+    .subscribe({
+      next: (data) => {
+        this.cartItems = data
+      },
+      error: (error) => console.log('Se ha producido un error', error)
+    });
+  }
+
+  checkItemExists(id: number) {
+    return this.cartItems.find(item => item.id === id)
+  }
+
+  addToCart(id: number) {
+    let cartItemInfo = this.checkItemExists(id)
+
+    if (cartItemInfo) {
+      cartItemInfo.count += 1;
+      this.cartApiService.putItem<Cart>(cartItemInfo, id).pipe(takeUntil(this.onDestroy$))
+      .subscribe({
+        next: (data) => {
+          console.log(`Película añadida exitosamente al carrito: ${data}`)
+        },
+        error: (error) => console.log('Se ha producido un error', error)
+      });
+    } else {
+      cartItemInfo = {
+        id: this.movieInfo.id,
+        title: this.movieInfo.title,
+        count: 1,
+        price: this.movieInfo.price
+      }
+      this.cartApiService.postItem<Cart>(cartItemInfo).pipe(takeUntil(this.onDestroy$))
+      .subscribe({
+        next: (data) => {
+          console.log(`Película añadida exitosamente al carrito: ${data}`)
+        },
+        error: (error) => console.log('Se ha producido un error', error)
+      });
+    }
   }
 
   audioMapper(iso: string) {
@@ -49,17 +102,4 @@ export class InfoComponent implements OnInit {
     return LANGUAGES[iso] || DEFAULT_LANGUAGE
   }
 
-  priceSetter(runtime: number) {
-    return runtime >= 120 ? 5000 : 4000
-  }
-
-  addToCart() {
-    this.cartApiService.postItem<Cart>({id: this.movieInfo.id, title: this.movieInfo.title, price: this.movieInfo.price}).pipe(takeUntil(this.onDestroy$))
-    .subscribe({
-      next: (data) => {
-        console.log(data)
-      },
-      error: (error) => console.log('Se ha producido un error', error)
-    });
-  }
 }

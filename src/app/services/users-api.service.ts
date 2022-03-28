@@ -21,6 +21,6 @@ export class UsersApiService {
   }
 
   deleteUser<User>(url: string, id: number) {
-    return this.http.delete(`${url}/${id}`);
+    return this.http.delete<User>(`${url}/${id}`);
   }
 }
