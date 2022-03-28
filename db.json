@@ -1,0 +1,60 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "anaperez",
+      "name": "Ana",
+      "lastName": "Perez",
+      "email": "anaper@test.com",
+      "birthDate": "1991-01-01",
+      "password": "123"
+    },
+    {
+      "id": 2,
+      "username": "juanmarz",
+      "name": "Juan",
+      "lastName": "Martinez",
+      "email": "juanm@test.com",
+      "birthDate": "1992-02-02",
+      "password": "4321"
+    },
+    {
+      "id": 3,
+      "username": "pedro123",
+      "name": "Pedro",
+      "lastName": "Rodriguez",
+      "email": "pedrodriguez@test.com",
+      "birthDate": "1993-03-03",
+      "password": "2143"
+    }
+  ],
+  "logged-users": [
+    {
+      "id": 1,
+      "username": "anaprz",
+      "password": "1234"
+    },
+    {
+      "id": 2,
+      "username": "juanmarz",
+      "password": "1234"
+    },
+    {
+      "id": 3,
+      "username": "pedro123",
+      "password": "1234"
+    }
+  ],
+  "cart": [
+    {
+      "id": 508947,
+      "title": "Red",
+      "price": 4000
+    },
+    {
+      "id": 634649,
+      "title": "Spider-Man: No Way Home",
+      "price": 5000
+    }
+  ]
+}

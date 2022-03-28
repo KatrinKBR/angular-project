@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { JsonDataService } from './json-data.service';
+import { CartApiService } from './cart-api.service';
 
-describe('JsonDataService', () => {
-  let service: JsonDataService;
+describe('CartApiService', () => {
+  let service: CartApiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(JsonDataService);
+    service = TestBed.inject(CartApiService);
   });
 
   it('should be created', () => {

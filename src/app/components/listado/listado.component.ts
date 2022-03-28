@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { JsonDataService } from 'src/app/services/json-data.service';
+import { MovieApiService } from 'src/app/services/movie-api.service';
+import { Movie } from 'src/app/models/movie';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-listado',
@@ -9,14 +11,17 @@ import { JsonDataService } from 'src/app/services/json-data.service';
 })
 export class ListadoComponent implements OnInit {
 
-  movieData: any = []
+  moviePosterPath = environment.MOVIE_POSTER_URL;
+  movieData: Movie[] = [];
   onDestroy$ = new Subject<any>();
 
-  constructor(private jsonDataService: JsonDataService) { }
+  constructor(private movieApiService: MovieApiService) { }
 
   ngOnInit(): void {
-    this.jsonDataService.getData().pipe(takeUntil(this.onDestroy$))
-    .subscribe((data) => (this.movieData = data))
+    this.movieApiService.getMovies().pipe(takeUntil(this.onDestroy$))
+    .subscribe({
+      next: (data) => (this.movieData = data.results),
+      error: (error) => console.log('Se ha producido un error', error)
+    })
   }
-
 }
