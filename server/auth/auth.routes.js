@@ -9,7 +9,6 @@ const rutasProtegidas = (req, res, next) => {
     jwt.verify(token, SECRET_KEY, (err, decoded) => {      
       if (err) {
         console.log('Token no válida')
-        //res.redirect('/')
         res.send({mensaje: 'Token no válida'})
 
       } else {
@@ -21,7 +20,6 @@ const rutasProtegidas = (req, res, next) => {
     });
   } else {
     console.log('Token no provista')
-    //res.redirect('/')
     res.send({mensaje: 'Token no provista'})
   }
 }

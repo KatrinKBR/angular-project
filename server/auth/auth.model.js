@@ -2,7 +2,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 mongoose.set('useCreateIndex', true);
 const userSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+    trim: true
+  },
   name: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  lastName: {
     type: String,
     required: true,
     trim: true
@@ -12,6 +22,11 @@ const userSchema = new Schema({
     required: true,
     trim: true,
     unique: true
+  },
+  birthDate: {
+    type: String,
+    required: true,
+    trim: true
   },
   password: {
     type: String,

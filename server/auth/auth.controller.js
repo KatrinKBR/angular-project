@@ -5,8 +5,11 @@ const SECRET_KEY = require('./auth.config');
 
 exports.createUser = (req, res, next) => {
   const newUser = {
+    username: req.body.username,
     name: req.body.name,
+    lastName: req.body.lastName,
     email: req.body.email,
+    birthDate: req.body.birthDate,
     password: bcrypt.hashSync(req.body.password)
   }
 
@@ -19,8 +22,11 @@ exports.createUser = (req, res, next) => {
         expiresIn: expiresIn
       });
     const dataUser = {
+      username: user.name,
       name: user.name,
+      lastName: user.lastName,
       email: user.email,
+      birthDate: user.birthDate,
       accessToken: accessToken,
       expiresIn: expiresIn
     }
@@ -31,14 +37,14 @@ exports.createUser = (req, res, next) => {
 
 exports.loginUser = (req, res, next) => {
   const userData = {
-    email: req.body.email,
+    username: req.body.username,
     password: req.body.password
   }
-  User.findOne({ email: userData.email }, (err, user) => {
+  User.findOne({ username: userData.username }, (err, user) => {
     if (err) return res.send({ message: 'Server error!' });
 
     if (!user) {
-      // email does not exist
+      // username does not exist
       res.send({ message: 'Something is wrong', error: 'usuario no encontrado' });
     } else {
       const resultPassword = bcrypt.compareSync(userData.password, user.password);
@@ -47,8 +53,11 @@ exports.loginUser = (req, res, next) => {
         const accessToken = jwt.sign({ id: user.id }, SECRET_KEY, { expiresIn: expiresIn });
 
         const dataUser = {
+          username: user.name,
           name: user.name,
+          lastName: user.lastName,
           email: user.email,
+          birthDate: user.birthDate,
           accessToken: accessToken,
           expiresIn: expiresIn
         }
@@ -63,7 +72,6 @@ exports.loginUser = (req, res, next) => {
 
 exports.datosUser = (req, res, next) => {
   let id = req.decoded.id
-  //console.log(id)
   
   User.findOne({ _id: id }, (err, user) => {
       if (err) return res.send({ message: 'Server error!' });
@@ -76,7 +84,15 @@ exports.datosUser = (req, res, next) => {
         const expiresIn = 60;
         const accessToken = jwt.sign({ id: user.id }, SECRET_KEY, { expiresIn: expiresIn });
         
-        res.json({user : {name:user.name, email:user.email, createdAt: user.createdAt, updatedAt: user.updatedAt, accessToken}});
+        res.json({user : { 
+          username: user.name,
+          name: user.name,
+          lastName: user.lastName,
+          email: user.email,
+          birthDate: user.birthDate,
+          createdAt: user.createdAt, 
+          updatedAt: user.updatedAt, 
+          accessToken}});
       }
   });
 }

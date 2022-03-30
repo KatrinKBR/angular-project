@@ -1,5 +1,5 @@
 module.exports = {
   PORT: process.env.PORT || 8080,
-  DB: 'mongodb://localhost:27017/loginJWT',
-  PUBLIC: 'public/cliente/dist/cliente'
+  DB: 'mongodb+srv://admin:4dm1np4ss@cluster0.68udj.mongodb.net/projectDB?retryWrites=true&w=majority',
+  PUBLIC: 'public'
 }
