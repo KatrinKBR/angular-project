@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { UsersApiService } from 'src/app/services/users-api.service';
-import { environment } from 'src/environments/environment';
-
 
 @Component({
   selector: 'app-login',
@@ -16,33 +15,25 @@ export class LoginComponent implements OnInit {
   onDestroy$ = new Subject<any>();
   loggedData!: User;
   
-  constructor(private fb: FormBuilder, private usersApi: UsersApiService) {
+  constructor(private fb: FormBuilder, private usersApi: UsersApiService, private router: Router) {
     this.loginForm = this.fb.group({
-      userName: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     })
   }
 
   ngOnInit(): void {
-    // Solo para efectos de prueba del metodo GET
-    this.usersApi.getUsers<User>(environment.LOGGED_USERS_URL).pipe(takeUntil(this.onDestroy$))
-    .subscribe({
-      next: (data) => {
-        this.loggedData = data;
-        console.log(this.loggedData);
-      },
-      error: (error) => console.log('Se ha producido un error', error)
-    });
   }
 
   login() {
-    this.usersApi.postUser<User>(environment.LOGGED_USERS_URL, this.loginForm.value)
-    .pipe(takeUntil(this.onDestroy$))
+    this.usersApi.login(this.loginForm.value).pipe(takeUntil(this.onDestroy$))
     .subscribe({
-      next: (data) => {
-        this.loggedData = data;
-        console.log(this.loggedData);
-        this.loginForm.reset();
+      next: (data: any) => {
+        if (data.dataUser) {
+          console.log('Inicio de sesion')
+          this.usersApi.token = data.dataUser.accessToken;
+          this.router.navigate(['/dashboard'])
+        }
       },
       error: (error) => console.log('Se ha producido un error', error)
     });

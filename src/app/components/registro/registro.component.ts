@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { UsersApiService } from 'src/app/services/users-api.service';
-import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-registro',
@@ -16,7 +17,7 @@ export class RegistroComponent implements OnInit {
   onDestroy$ = new Subject<any>();
   userData!: User;
 
-  constructor(private fb: FormBuilder, private usersApi: UsersApiService) { 
+  constructor(private fb: FormBuilder, private usersApi: UsersApiService, private router: Router) { 
     this.userForm = this.fb.group({
       username: ['', Validators.required],
       name: ['', Validators.required],
@@ -42,13 +43,14 @@ export class RegistroComponent implements OnInit {
       password: this.userForm.value.password
     };
 
-    this.usersApi.postUser<User>(environment.USERS_URL, user)
-    .pipe(takeUntil(this.onDestroy$))
+    this.usersApi.register(user).pipe(takeUntil(this.onDestroy$))
     .subscribe({
-      next: (data) => {
-        this.userData = data;
-        console.log(`Usuario registrado correctamente`);
-        this.userForm.reset();
+      next: (data: any) => {
+        if (data.dataUser) {
+          console.log(`Usuario registrado correctamente`, data);
+          this.usersApi.token = data.dataUser.accessToken;
+          this.router.navigate(['/dashboard'])
+        }
       },
       error: (error) => console.log('Se ha producido un error', error)
     });
