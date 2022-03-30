@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CarruselComponent } from './components/carrusel/carrusel.component';
@@ -15,6 +15,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { LandingComponent } from './components/landing/landing.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { HttpInterceptorService } from './interceptors/http-interceptor.service';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
     LandingComponent,
     NotFoundComponent,
     UserListComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
