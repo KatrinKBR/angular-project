@@ -3,20 +3,22 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UsersApiService } from '../services/users-api.service';
 
-/* @Injectable({
-  providedIn: 'root'
-}) */
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
 
   constructor(private usersApi: UsersApiService) { }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      const cloneReq = req.clone({
-        headers: this.addToken(req.headers)
-      });
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+      let req;
+      if (request.url.indexOf('themoviedb') > -1)  {
+        req = request.clone();
+      } else {
+        req = request.clone({
+          headers: this.addToken(request.headers)
+        });
+      }
 
-      return next.handle(cloneReq);
+      return next.handle(req);
   }
 
   private addToken(headers: HttpHeaders) : HttpHeaders {
