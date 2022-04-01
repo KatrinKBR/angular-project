@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { Cart } from 'src/app/models/cart';
@@ -6,6 +6,7 @@ import { MovieDetails } from 'src/app/models/movie';
 import { CartApiService } from 'src/app/services/cart-api.service';
 import { MovieApiService } from 'src/app/services/movie-api.service';
 import { environment } from 'src/environments/environment';
+import {Toast} from 'bootstrap'
 
 
 @Component({
@@ -14,6 +15,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./info.component.scss']
 })
 export class InfoComponent implements OnInit {
+  @ViewChild('myToast',{static:true}) toastEl!: ElementRef<HTMLDivElement>;
+  toast: Toast | null = null;
 
   movieInfo!: MovieDetails;
   moviePosterPath = environment.MOVIE_POSTER_URL;
@@ -25,6 +28,7 @@ export class InfoComponent implements OnInit {
   ngOnInit(): void {
     this.getMovieDetails();
     this.getCartItems();
+    this.toast = new Toast(this.toastEl.nativeElement,{});
   }
 
   getMovieDetails() {
@@ -37,10 +41,6 @@ export class InfoComponent implements OnInit {
       },
       error: (error) => console.log('Se ha producido un error', error)
     });
-  }
-
-  priceSetter(runtime: number) {
-    return runtime >= 120 ? 5000 : 4000
   }
 
   getCartItems() {
@@ -65,7 +65,8 @@ export class InfoComponent implements OnInit {
       this.cartApiService.putItem<Cart>(cartItemInfo, id).pipe(takeUntil(this.onDestroy$))
       .subscribe({
         next: (data) => {
-          console.log(`Película añadida exitosamente al carrito: ${data}`)
+          console.log(`Película añadida exitosamente al carrito`);
+          this.showCartToaster(data.title, data.price);
         },
         error: (error) => console.log('Se ha producido un error', error)
       });
@@ -79,11 +80,22 @@ export class InfoComponent implements OnInit {
       this.cartApiService.postItem<Cart>(cartItemInfo).pipe(takeUntil(this.onDestroy$))
       .subscribe({
         next: (data) => {
-          console.log(`Película añadida exitosamente al carrito: ${data}`)
+          console.log(`Película añadida exitosamente al carrito`);
+          this.showCartToaster(data.title, data.price);
         },
         error: (error) => console.log('Se ha producido un error', error)
       });
     }
+  }
+
+  showCartToaster(title: string, price: number){
+    let toastContent = document.getElementById('toastContent');
+    toastContent?.append(`${title} $${price}`);
+    this.toast!.show();
+  }
+
+  priceSetter(runtime: number) {
+    return runtime >= 120 ? 5000 : 4000
   }
 
   audioMapper(iso: string) {
