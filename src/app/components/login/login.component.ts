@@ -29,10 +29,17 @@ export class LoginComponent implements OnInit {
     this.usersApi.login(this.loginForm.value).pipe(takeUntil(this.onDestroy$))
     .subscribe({
       next: (data: any) => {
+
         if (data.dataUser) {
-          console.log('Inicio de sesion')
+          console.log(`Inicio de sesion`)
           this.usersApi.token = data.dataUser.accessToken;
-          this.router.navigate(['/dashboard'])
+          sessionStorage.setItem("user", data.dataUser.username);
+
+          if (data.dataUser.username === 'admin') {
+            this.router.navigate(['/admin'])
+          } else {
+            this.router.navigate(['/dashboard'])
+          }
         }
       },
       error: (error) => console.log('Se ha producido un error', error)

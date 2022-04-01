@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InfoComponent } from './components/info/info.component';
@@ -10,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { LoginRouteGuard } from './guards/login-route.guard';
 
 const routes: Routes = [
   { path: '', component: LandingComponent},
@@ -19,6 +21,7 @@ const routes: Routes = [
   { path: 'info/:id', component: InfoComponent },
   { path: 'carrito', component: CarritoComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'admin', canActivate : [LoginRouteGuard], component: AdminComponent },
   { path: 'user-list', component: UserListComponent },
   { path: '**', component: NotFoundComponent}
 ]

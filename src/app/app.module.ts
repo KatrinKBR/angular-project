@@ -17,6 +17,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { HttpInterceptorService } from './interceptors/http-interceptor.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     NotFoundComponent,
     UserListComponent,
     DashboardComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
