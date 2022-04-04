@@ -10,7 +10,6 @@ import { ListadoComponent } from './components/listado/listado.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegistroComponent } from './components/registro/registro.component';
-import { UserListComponent } from './components/user-list/user-list.component';
 import { LoginRouteGuard } from './guards/login-route.guard';
 
 const routes: Routes = [
@@ -22,7 +21,6 @@ const routes: Routes = [
   { path: 'carrito', component: CarritoComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'admin', canActivate : [LoginRouteGuard], component: AdminComponent },
-  { path: 'user-list', component: UserListComponent },
   { path: '**', component: NotFoundComponent}
 ]
 

@@ -14,7 +14,6 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LandingComponent } from './components/landing/landing.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { UserListComponent } from './components/user-list/user-list.component';
 import { HttpInterceptorService } from './interceptors/http-interceptor.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -31,7 +30,6 @@ import { AdminComponent } from './components/admin/admin.component';
     CarritoComponent,
     LandingComponent,
     NotFoundComponent,
-    UserListComponent,
     DashboardComponent,
     AdminComponent,
   ],
