@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { User } from 'src/app/models/user';
 import { UsersApiService } from 'src/app/services/users-api.service';
 
 @Component({
@@ -9,17 +11,25 @@ import { UsersApiService } from 'src/app/services/users-api.service';
 })
 export class AdminComponent implements OnInit {
   onDestroy$ = new Subject<any>();
+  allUsersData!: User[];
 
-  constructor(private usersApi: UsersApiService) { }
+  constructor(private usersApi: UsersApiService, private router: Router) { }
 
   ngOnInit(): void {
-  }
-
-  getDatos() {
     this.usersApi.datos().pipe(takeUntil(this.onDestroy$))
     .subscribe({
       next: (data: any) => {
-        console.log(data)
+        this.allUsersData = data
+      },
+      error: (error) => console.log('Se ha producido un error', error)
+    });
+  }
+
+  logout() {
+    this.usersApi.logout().pipe(takeUntil(this.onDestroy$))
+    .subscribe({
+      next: (data: any) => {
+          this.router.navigate(['/'])
       },
       error: (error) => console.log('Se ha producido un error', error)
     });

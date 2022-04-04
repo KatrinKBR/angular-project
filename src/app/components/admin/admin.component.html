@@ -1,1 +1,28 @@
 <p>Perfil de admin</p>
+<button class="btn btn-danger" (click)="logout()">Logout</button>
+
+<div class="container">
+    <p class="fs-2 text-center my-5">Usuarios</p>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Nombre de usuario</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Email</th>
+            <th scope="col">Fecha de nacimiento</th>
+            <th scope="col">Rol</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of allUsersData">
+            <th scope="row">{{user.username}}</th>
+            <td>{{user.name}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.birthDate}}</td>
+            <td>{{user.role}}</td>
+          </tr>
+        </tbody>
+    </table>
+</div>

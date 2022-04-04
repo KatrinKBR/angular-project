@@ -16,6 +16,8 @@ export class RegistroComponent implements OnInit {
   userForm!: FormGroup;
   onDestroy$ = new Subject<any>();
   userData!: User;
+  errorMsg!: string;
+  showAlert: boolean = false;
 
   constructor(private fb: FormBuilder, private usersApi: UsersApiService, private router: Router) { 
     this.userForm = this.fb.group({
@@ -34,22 +36,24 @@ export class RegistroComponent implements OnInit {
 
   register() {
     let user: User = {
-      id: 0,
       username: this.userForm.value.username,
       name: this.userForm.value.name,
       lastName: this.userForm.value.lastName,
       email: this.userForm.value.email,
       birthDate: this.userForm.value.birthDate,
-      password: this.userForm.value.password
+      password: this.userForm.value.password,
+      role: 'user'
     };
 
     this.usersApi.register(user).pipe(takeUntil(this.onDestroy$))
     .subscribe({
       next: (data: any) => {
         if (data.dataUser) {
-          console.log(`Usuario registrado correctamente`, data);
           this.usersApi.token = data.dataUser.accessToken;
           this.router.navigate(['/dashboard'])
+        } else {
+          this.errorMsg = data.error
+          this.showAlert = true;
         }
       },
       error: (error) => console.log('Se ha producido un error', error)
