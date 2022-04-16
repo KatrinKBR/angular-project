@@ -17,6 +17,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HttpInterceptorService } from './interceptors/http-interceptor.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { appReducers } from './store/app.reducers';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,12 @@ import { AdminComponent } from './components/admin/admin.component';
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(appReducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      autoPause: true,
+    })
   ],
   providers: [ {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true} ],
   bootstrap: [AppComponent]

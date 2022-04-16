@@ -1,12 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { Cart } from 'src/app/models/cart';
+import { CartItem } from 'src/app/models/cartItem';
 import { MovieDetails } from 'src/app/models/movie';
-import { CartApiService } from 'src/app/services/cart-api.service';
 import { MovieApiService } from 'src/app/services/movie-api.service';
 import { environment } from 'src/environments/environment';
-import {Toast} from 'bootstrap'
+import {Toast} from 'bootstrap';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.reducers';
+import * as actions from 'src/app/store/actions/cart.actions';
 
 
 @Component({
@@ -21,9 +23,9 @@ export class InfoComponent implements OnInit {
   movieInfo!: MovieDetails;
   moviePosterPath = environment.MOVIE_POSTER_URL;
   onDestroy$ = new Subject<any>();
-  cartItems!: Cart[];
+  cartItems: Array<CartItem> = [];
 
-  constructor(private route: ActivatedRoute, private movieApiService: MovieApiService, private cartApiService: CartApiService) { }
+  constructor(private route: ActivatedRoute, private movieApiService: MovieApiService, private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.getMovieDetails();
@@ -44,12 +46,8 @@ export class InfoComponent implements OnInit {
   }
 
   getCartItems() {
-    this.cartApiService.getAllItems<Cart[]>().pipe(takeUntil(this.onDestroy$))
-    .subscribe({
-      next: (data) => {
-        this.cartItems = data
-      },
-      error: (error) => console.log('Se ha producido un error', error)
+    this.store.select('cart').subscribe((cart) => {
+      this.cartItems = cart;
     });
   }
 
@@ -59,17 +57,16 @@ export class InfoComponent implements OnInit {
 
   addToCart(id: number) {
     let cartItemInfo = this.checkItemExists(id)
-
     if (cartItemInfo) {
-      cartItemInfo.count += 1;
-      this.cartApiService.putItem<Cart>(cartItemInfo, id).pipe(takeUntil(this.onDestroy$))
-      .subscribe({
-        next: (data) => {
-          console.log(`Película añadida exitosamente al carrito`);
-          this.showCartToaster(data.title, data.price);
-        },
-        error: (error) => console.log('Se ha producido un error', error)
-      });
+      let countItem = cartItemInfo.count;
+      this.store.dispatch(actions.deleteItemCart({payload: cartItemInfo}));
+      cartItemInfo = {
+        id: this.movieInfo.id,
+        title: this.movieInfo.title,
+        count: countItem + 1,
+        price: this.movieInfo.price
+      }
+      this.store.dispatch(actions.addItemCart({payload: cartItemInfo}));
     } else {
       cartItemInfo = {
         id: this.movieInfo.id,
@@ -77,15 +74,9 @@ export class InfoComponent implements OnInit {
         count: 1,
         price: this.movieInfo.price
       }
-      this.cartApiService.postItem<Cart>(cartItemInfo).pipe(takeUntil(this.onDestroy$))
-      .subscribe({
-        next: (data) => {
-          console.log(`Película añadida exitosamente al carrito`);
-          this.showCartToaster(data.title, data.price);
-        },
-        error: (error) => console.log('Se ha producido un error', error)
-      });
+      this.store.dispatch(actions.addItemCart({payload: cartItemInfo}));
     }
+    this.showCartToaster(cartItemInfo.title, cartItemInfo.price);
   }
 
   showCartToaster(title: string, price: number){

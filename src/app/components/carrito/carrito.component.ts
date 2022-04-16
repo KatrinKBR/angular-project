@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { Cart } from 'src/app/models/cart';
-import { CartApiService } from 'src/app/services/cart-api.service';
+import { CartItem } from 'src/app/models/cartItem';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.reducers';
+import { deleteItemCart } from 'src/app/store/actions/cart.actions';
 
 @Component({
   selector: 'app-carrito',
@@ -10,19 +12,13 @@ import { CartApiService } from 'src/app/services/cart-api.service';
 })
 export class CarritoComponent implements OnInit {
 
-  cartData: Cart[] = [];
+  cartData: CartItem[] = [];
   onDestroy$ = new Subject<any>();
 
-  constructor(private cartApiService: CartApiService) { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    this.cartApiService.getAllItems<Cart[]>().pipe(takeUntil(this.onDestroy$))
-    .subscribe({
-      next: (data) => {
-        this.cartData = data
-      },
-      error: (error) => console.log('Se ha producido un error', error)
-    });
+    this.getCartItems()
   }
 
   calculateTotal() {
@@ -31,6 +27,17 @@ export class CarritoComponent implements OnInit {
       sum += element.price
     }
     return sum
+  }
+
+  getCartItems() {
+    this.store.select('cart').subscribe((cart) => {
+      this.cartData = cart;
+    });
+  }
+
+  deleteItem(item: CartItem) {
+    this.store.dispatch(deleteItemCart({payload: item}));
+    this.getCartItems()
   }
 
   shop() {
