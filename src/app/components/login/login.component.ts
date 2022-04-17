@@ -34,11 +34,12 @@ export class LoginComponent implements OnInit {
         if (data.dataUser) {
           this.usersApi.token = data.dataUser.accessToken;
           sessionStorage.setItem("user", data.dataUser.role);
+          console.log(`data.dataUser.role: ${data.dataUser.role}`)
 
           if (data.dataUser.role === 'admin') {
             this.router.navigate(['/admin'])
           } else {
-            this.router.navigate(['/dashboard'])
+            this.router.navigate(['/listado'])
           }
         } else {
           this.errorMsg = data.error

@@ -2,10 +2,11 @@
     <p class="fs-2 text-center my-5">Películas</p>
     <div class="card text-center" *ngFor="let movie of movieData">
         <img src="{{moviePosterPath+movie.poster_path}}" class="card-img-top mt-4" alt="">
-        <div class="card-body">
-          <h5 class="card-title">{{movie.title}}</h5>
-          <p class="card-text">{{movie.release_date | date: 'dd-MM-yyyy'}}</p>
-          <a [routerLink] ="['/info', movie.id]" class="btn btn-primary mb-2">Ver más</a>
-        </div>
+        <img src="../../../assets/default.png" class="card-img-top mt-4" alt="" *ngIf="movie.poster_path == null">
+      <div class="card-body">
+        <h5 class="card-title">{{movie.title}}</h5>
+        <p class="card-text">{{movie.release_date | date: 'dd-MM-yyyy'}}</p>
+        <a [routerLink] ="['/info', movie.id]" class="btn btn-primary mb-2">Ver más</a>
+      </div>
     </div>
 </div>

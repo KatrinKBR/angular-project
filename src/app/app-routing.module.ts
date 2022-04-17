@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InfoComponent } from './components/info/info.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { ListadoComponent } from './components/listado/listado.component';
@@ -19,7 +18,6 @@ const routes: Routes = [
   { path: 'listado', component: ListadoComponent },
   { path: 'info/:id', component: InfoComponent },
   { path: 'carrito', component: CarritoComponent },
-  { path: 'dashboard', component: DashboardComponent },
   { path: 'admin', canActivate : [LoginRouteGuard], component: AdminComponent },
   { path: '**', component: NotFoundComponent}
 ]

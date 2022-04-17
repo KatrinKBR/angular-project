@@ -50,7 +50,7 @@ export class RegistroComponent implements OnInit {
       next: (data: any) => {
         if (data.dataUser) {
           this.usersApi.token = data.dataUser.accessToken;
-          this.router.navigate(['/dashboard'])
+          this.router.navigate(['/listado'])
         } else {
           this.errorMsg = data.error
           this.showAlert = true;
